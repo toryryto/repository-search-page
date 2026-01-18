@@ -1,23 +1,36 @@
 import { style } from '@vanilla-extract/css';
+import { flexColumn } from '../../styles/utils.css';
 
-const wrapper = style({
-  maxWidth: '600px',
-  margin: '0 auto',
-  padding: '0 16px',
-});
+const wrapper = style([
+  flexColumn,
+  {
+    gap: 20,
+    maxWidth: 600,
+    margin: '0 auto',
+    padding: '0 16px',
+  },
+]);
 
 const header = style({
   width: '100%',
-  height: 48,
-  padding: 18,
+  height: 60,
+  padding: '18px 0',
 });
 
-const section = style({
-  padding: '0 18px',
+const headerText = style({
+  fontWeight: 600,
 });
+
+const section = style([
+  flexColumn,
+  {
+    gap: 20,
+  },
+]);
 
 export const layoutStyles = {
   wrapper,
   header,
+  headerText,
   section,
 };

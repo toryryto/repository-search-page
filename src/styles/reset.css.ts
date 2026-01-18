@@ -18,6 +18,7 @@ globalStyle('*, *::before, *::after', {
   '@layer': {
     [layers.reset]: {
       boxSizing: 'border-box',
+      fontFamily: 'Pretendard',
     },
   },
 });
