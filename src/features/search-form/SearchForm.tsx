@@ -18,21 +18,24 @@ export function SearchForm({ onSearch, initialQuery = '' }: Props) {
     onSearch(trimmed);
   };
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) =>
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
+  };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit} role='search'>
-      <input
-        type='search'
-        value={input}
-        onChange={handleInputChange}
-        className={styles.input}
-        placeholder='검색어를 입력해주세요.'
-      />
-      <button type='submit' className={styles.button}>
-        <span className={styles.buttonText}>검색</span>
-      </button>
-    </form>
+    <search>
+      <form className={styles.form} onSubmit={handleSubmit} role='search'>
+        <input
+          type='search'
+          value={input}
+          onChange={handleInputChange}
+          className={styles.input}
+          placeholder='검색어를 입력해주세요.'
+        />
+        <button type='submit' className={styles.button}>
+          <span className={styles.buttonText}>검색</span>
+        </button>
+      </form>
+    </search>
   );
 }

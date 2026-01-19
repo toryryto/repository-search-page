@@ -1,7 +1,7 @@
 import { graphql, useLazyLoadQuery } from 'react-relay';
+import { RepositoryItem } from '../repository-item/RepositoryItem';
 import type { RepositoryListQuery } from './__generated__/RepositoryListQuery.graphql';
 import { repositoryListStyles as styles } from './RepositoryList.css';
-import { RepositoryItem } from '../repository-item/RepositoryItem';
 
 type Props = {
   query: string;
@@ -34,7 +34,7 @@ export function RepositoryList({ query }: Props) {
   }
 
   return (
-    <ul className={styles.list} aria-label="Repository search results">
+    <ul className={styles.list} aria-label='Repository search results'>
       {repositories.map((node) => (
         <RepositoryItem key={node.id} repositoryRef={node} />
       ))}

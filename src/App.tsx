@@ -1,14 +1,20 @@
-import { Suspense, useState } from 'react';
+import { Suspense } from 'react';
+import { useSearchParams } from 'react-router';
 import { Layout } from './components/layout/layout';
 import { RepositoryList } from './features/repository-list/RepositoryList';
 import { SearchForm } from './features/search-form/SearchForm';
 
 function App() {
-  const [query, setQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('search') || '';
+
+  const handleSearch = (value: string) => {
+    setSearchParams({ search: value });
+  };
 
   return (
     <Layout>
-      <SearchForm onSearch={setQuery} initialQuery={query} />
+      <SearchForm onSearch={handleSearch} initialQuery={query} />
 
       {query && (
         <Suspense fallback={<p>로딩 중...</p>}>
