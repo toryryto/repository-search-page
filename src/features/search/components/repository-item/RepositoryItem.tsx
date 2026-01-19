@@ -1,6 +1,6 @@
 import { CircleAlert, Clock, GitFork, Star } from 'lucide-react';
 import { graphql, useFragment } from 'react-relay';
-import { formatRelativeTime } from '../../utils/formatRelativeTime';
+import { formatRelativeTime } from '../../../../utils/formatRelativeTime';
 import { repositoryItemStyle as styles } from './RepositoryItem.css';
 import type { RepositoryItem_repository$key } from './__generated__/RepositoryItem_repository.graphql';
 

@@ -1,8 +1,8 @@
 import { Suspense } from 'react';
 import { useSearchParams } from 'react-router';
 import { Layout } from './components/layout/layout';
-import { RepositoryList } from './features/repository-list/RepositoryList';
-import { SearchForm } from './features/search-form/SearchForm';
+import { RepositoryList } from './features/search/components/repository-list/RepositoryList';
+import { SearchForm } from './features/search/components/search-form/SearchForm';
 
 function App() {
   const [searchParams, setSearchParams] = useSearchParams();

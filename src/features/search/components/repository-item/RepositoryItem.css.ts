@@ -1,5 +1,5 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { alignCenter, flexColumn, flexRow } from '../../styles/utils.css';
+import { alignCenter, flexColumn, flexRow } from '../../../../styles/utils.css';
 
 const wrapper = style([
   flexColumn,
