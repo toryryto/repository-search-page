@@ -1,5 +1,10 @@
-import { globalStyle, style } from '@vanilla-extract/css';
-import { alignCenter, flexColumn, flexRow } from '../../../../styles/utils.css';
+import { style } from '@vanilla-extract/css';
+import {
+  alignCenter,
+  flexBetween,
+  flexColumn,
+  flexRow,
+} from '../../../../styles/utils.css';
 
 const wrapper = style([
   flexColumn,
@@ -24,14 +29,12 @@ const title = style({
   lineHeight: 1.4,
 });
 
-globalStyle(`${title} a`, {
-  color: '#0969da',
-  textDecoration: 'none',
-});
-
-globalStyle(`${title} a:hover`, {
-  textDecoration: 'underline',
-});
+const titleRow = style([
+  flexBetween,
+  {
+    width: '100%',
+  },
+]);
 
 const description = style({
   color: '#656d76',
@@ -88,6 +91,7 @@ export const repositoryItemStyle = {
   wrapper,
   header,
   title,
+  titleRow,
   description,
   meta,
   language,

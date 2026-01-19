@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<2d92906d5a765a0e006971a616e1e6d9>>
+ * @generated SignedSource<<2079d566ff29f6c7794363f9789a919b>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,6 +13,7 @@ import { FragmentRefs } from "relay-runtime";
 export type RepositoryItem_repository$data = {
   readonly description: string | null | undefined;
   readonly forkCount: number;
+  readonly id: string;
   readonly issues: {
     readonly totalCount: number;
   };
@@ -51,6 +52,13 @@ return {
   "metadata": null,
   "name": "RepositoryItem_repository",
   "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "id",
+      "storageKey": null
+    },
     (v0/*: any*/),
     {
       "alias": null,
@@ -163,6 +171,6 @@ return {
 };
 })();
 
-(node as any).hash = "4871c315ed4e9a6c72d0f80ac9512ca9";
+(node as any).hash = "45adeb3be19e6144bfbb1dc3f3436cc9";
 
 export default node;

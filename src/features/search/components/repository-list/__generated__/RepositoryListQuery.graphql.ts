@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<804000c4a0996e84f4269f4fddcfd599>>
+ * @generated SignedSource<<bb3f83ef733b7f21ba89a00619493133>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -273,12 +273,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "9b0509cbf05b0518420087cc939318ad",
+    "cacheID": "239fdb5c57d78a8ce3b0b69ccf3ea6c5",
     "id": null,
     "metadata": {},
     "name": "RepositoryListQuery",
     "operationKind": "query",
-    "text": "query RepositoryListQuery(\n  $searchQuery: String!\n) {\n  search(query: $searchQuery, type: REPOSITORY, first: 10) {\n    nodes {\n      __typename\n      ... on Repository {\n        id\n        ...RepositoryItem_repository\n      }\n      ... on Node {\n        __isNode: __typename\n        id\n      }\n    }\n  }\n}\n\nfragment RepositoryItem_repository on Repository {\n  name\n  description\n  stargazerCount\n  forkCount\n  updatedAt\n  languages(first: 1) {\n    edges {\n      node {\n        name\n        id\n      }\n    }\n  }\n  licenseInfo {\n    spdxId\n    name\n    id\n  }\n  issues {\n    totalCount\n  }\n}\n"
+    "text": "query RepositoryListQuery(\n  $searchQuery: String!\n) {\n  search(query: $searchQuery, type: REPOSITORY, first: 10) {\n    nodes {\n      __typename\n      ... on Repository {\n        id\n        ...RepositoryItem_repository\n      }\n      ... on Node {\n        __isNode: __typename\n        id\n      }\n    }\n  }\n}\n\nfragment RepositoryItem_repository on Repository {\n  id\n  name\n  description\n  stargazerCount\n  forkCount\n  updatedAt\n  languages(first: 1) {\n    edges {\n      node {\n        name\n        id\n      }\n    }\n  }\n  licenseInfo {\n    spdxId\n    name\n    id\n  }\n  issues {\n    totalCount\n  }\n}\n"
   }
 };
 })();

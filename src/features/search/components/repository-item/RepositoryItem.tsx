@@ -1,6 +1,7 @@
 import { CircleAlert, Clock, GitFork, Star } from 'lucide-react';
 import { graphql, useFragment } from 'react-relay';
 import { formatRelativeTime } from '../../../../utils/formatRelativeTime';
+import { BookmarkButton } from '../../../bookmark/components/button/BookmarkButton';
 import { repositoryItemStyle as styles } from './RepositoryItem.css';
 import type { RepositoryItem_repository$key } from './__generated__/RepositoryItem_repository.graphql';
 
@@ -12,6 +13,7 @@ export function RepositoryItem({ repositoryRef }: Props) {
   const repository = useFragment(
     graphql`
       fragment RepositoryItem_repository on Repository {
+        id
         name
         description
         stargazerCount
@@ -41,7 +43,14 @@ export function RepositoryItem({ repositoryRef }: Props) {
   return (
     <li className={styles.wrapper}>
       <div className={styles.header}>
-        <h3 className={styles.title}>{repository?.name}</h3>
+        <div className={styles.titleRow}>
+          <h3 className={styles.title}>{repository?.name}</h3>
+
+          <BookmarkButton
+            repositoryId={repository.id}
+            repositoryName={repository.name}
+          />
+        </div>
         {repository.description && (
           <p className={styles.description}>{repository.description}</p>
         )}
