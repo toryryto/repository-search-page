@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<bb3f83ef733b7f21ba89a00619493133>>
+ * @generated SignedSource<<82eddf16984b97ed59963e705a8d710e>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -251,6 +251,13 @@ return {
                       }
                     ],
                     "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "viewerHasStarred",
+                    "storageKey": null
                   }
                 ],
                 "type": "Repository",
@@ -273,12 +280,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "239fdb5c57d78a8ce3b0b69ccf3ea6c5",
+    "cacheID": "7555560713bb5d04360ffff6abb07592",
     "id": null,
     "metadata": {},
     "name": "RepositoryListQuery",
     "operationKind": "query",
-    "text": "query RepositoryListQuery(\n  $searchQuery: String!\n) {\n  search(query: $searchQuery, type: REPOSITORY, first: 10) {\n    nodes {\n      __typename\n      ... on Repository {\n        id\n        ...RepositoryItem_repository\n      }\n      ... on Node {\n        __isNode: __typename\n        id\n      }\n    }\n  }\n}\n\nfragment RepositoryItem_repository on Repository {\n  id\n  name\n  description\n  stargazerCount\n  forkCount\n  updatedAt\n  languages(first: 1) {\n    edges {\n      node {\n        name\n        id\n      }\n    }\n  }\n  licenseInfo {\n    spdxId\n    name\n    id\n  }\n  issues {\n    totalCount\n  }\n}\n"
+    "text": "query RepositoryListQuery(\n  $searchQuery: String!\n) {\n  search(query: $searchQuery, type: REPOSITORY, first: 10) {\n    nodes {\n      __typename\n      ... on Repository {\n        id\n        ...RepositoryItem_repository\n      }\n      ... on Node {\n        __isNode: __typename\n        id\n      }\n    }\n  }\n}\n\nfragment RepositoryItem_repository on Repository {\n  id\n  name\n  description\n  stargazerCount\n  forkCount\n  updatedAt\n  languages(first: 1) {\n    edges {\n      node {\n        name\n        id\n      }\n    }\n  }\n  licenseInfo {\n    spdxId\n    name\n    id\n  }\n  issues {\n    totalCount\n  }\n  ...StarButton_repository\n}\n\nfragment StarButton_repository on Repository {\n  id\n  viewerHasStarred\n}\n"
   }
 };
 })();

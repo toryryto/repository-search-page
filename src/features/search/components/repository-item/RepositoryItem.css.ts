@@ -87,6 +87,12 @@ const license = style([
   },
 ]);
 
+const reactionButtonWrap = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: 4,
+});
+
 export const repositoryItemStyle = {
   wrapper,
   header,
@@ -98,4 +104,5 @@ export const repositoryItemStyle = {
   stats,
   statItem,
   license,
+  reactionButtonWrap,
 };

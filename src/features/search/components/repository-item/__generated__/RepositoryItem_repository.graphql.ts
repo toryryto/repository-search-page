@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<2079d566ff29f6c7794363f9789a919b>>
+ * @generated SignedSource<<0f3dc51117755f24edc9e32958fdcb2d>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -31,6 +31,7 @@ export type RepositoryItem_repository$data = {
   readonly name: string;
   readonly stargazerCount: number;
   readonly updatedAt: any;
+  readonly " $fragmentSpreads": FragmentRefs<"StarButton_repository">;
   readonly " $fragmentType": "RepositoryItem_repository";
 };
 export type RepositoryItem_repository$key = {
@@ -164,6 +165,11 @@ return {
         }
       ],
       "storageKey": null
+    },
+    {
+      "args": null,
+      "kind": "FragmentSpread",
+      "name": "StarButton_repository"
     }
   ],
   "type": "Repository",
@@ -171,6 +177,6 @@ return {
 };
 })();
 
-(node as any).hash = "45adeb3be19e6144bfbb1dc3f3436cc9";
+(node as any).hash = "5707672346d697abc99c583188b13baa";
 
 export default node;

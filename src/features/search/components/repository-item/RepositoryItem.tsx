@@ -2,6 +2,7 @@ import { CircleAlert, Clock, GitFork, Star } from 'lucide-react';
 import { graphql, useFragment } from 'react-relay';
 import { formatRelativeTime } from '../../../../utils/formatRelativeTime';
 import { BookmarkButton } from '../../../bookmark/components/button/BookmarkButton';
+import { StartButton } from '../../../star/components/button/StarButton';
 import { repositoryItemStyle as styles } from './RepositoryItem.css';
 import type { RepositoryItem_repository$key } from './__generated__/RepositoryItem_repository.graphql';
 
@@ -33,6 +34,8 @@ export function RepositoryItem({ repositoryRef }: Props) {
         issues {
           totalCount
         }
+
+        ...StarButton_repository
       }
     `,
     repositoryRef,
@@ -46,10 +49,14 @@ export function RepositoryItem({ repositoryRef }: Props) {
         <div className={styles.titleRow}>
           <h3 className={styles.title}>{repository?.name}</h3>
 
-          <BookmarkButton
-            repositoryId={repository.id}
-            repositoryName={repository.name}
-          />
+          <div className={styles.reactionButtonWrap}>
+            <BookmarkButton
+              repositoryId={repository.id}
+              repositoryName={repository.name}
+            />
+
+            <StartButton repositoryRef={repository} />
+          </div>
         </div>
         {repository.description && (
           <p className={styles.description}>{repository.description}</p>
