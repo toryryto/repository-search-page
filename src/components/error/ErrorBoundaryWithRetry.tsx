@@ -37,16 +37,20 @@ class ErrorBoundaryWithRetry extends Component<Props, State> {
       }
 
       return (
-        <section className={styles.wrapper}>
+        <section className={styles.wrapper} aria-label="Error notification">
           <h2 className={styles.title}>
-            문제가 발생했습니다.{'\n'}아래의 더보기 버튼을 눌러 다시
-            시도해주세요.
+            Something went wrong.{'\n'}Please click the button below to try
+            again.
           </h2>
 
-          <p>{this.state.error?.message}</p>
+          <p aria-live="polite">{this.state.error?.message}</p>
 
-          <button onClick={this.handleRetry} className={styles.button}>
-            다시 시도하기
+          <button
+            onClick={this.handleRetry}
+            className={styles.button}
+            aria-label="Reload page to try again"
+          >
+            Try Again
           </button>
         </section>
       );
