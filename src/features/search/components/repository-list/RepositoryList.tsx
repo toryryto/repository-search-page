@@ -1,4 +1,5 @@
 import { graphql, useLazyLoadQuery, usePaginationFragment } from 'react-relay';
+import { LoadingSpinner } from '../../../../components/ui/loading-spinner/LoadingSpinner';
 import { useInfiniteScroll } from '../../../../hooks/useInifiniteScroll';
 import { RepositoryItem } from '../repository-item/RepositoryItem';
 import type { RepositoryList_query$key } from './__generated__/RepositoryList_query.graphql';
@@ -71,15 +72,17 @@ export function RepositoryList({ query }: Props) {
   }
 
   return (
-    <>
-      <ul className={styles.list} aria-label='Repository search results'>
-        {repositories.map((edge) => (
-          <RepositoryItem key={edge.node.id} repositoryRef={edge.node} />
-        ))}
-      </ul>
+    <ul className={styles.list} aria-label='Repository search results'>
+      {repositories.map((edge) => (
+        <RepositoryItem key={edge.node.id} repositoryRef={edge.node} />
+      ))}
 
       {hasNext && <div ref={targetRef} />}
-      {isLoadingNext && <div className={styles.loading}>로딩중입니다....</div>}
-    </>
+      {isLoadingNext && (
+        <div className={styles.loading}>
+          <LoadingSpinner />
+        </div>
+      )}
+    </ul>
   );
 }

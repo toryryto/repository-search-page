@@ -9,7 +9,7 @@ type Props = {
   repositoryRef: StarButton_repository$key;
 };
 
-export function StartButton({ repositoryRef }: Props) {
+export function StarButton({ repositoryRef }: Props) {
   const repository = useFragment(
     graphql`
       fragment StarButton_repository on Repository {

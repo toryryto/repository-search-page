@@ -37,18 +37,18 @@ class ErrorBoundaryWithRetry extends Component<Props, State> {
       }
 
       return (
-        <section className={styles.wrapper} aria-label="Error notification">
+        <section className={styles.wrapper} aria-label='Error notification'>
           <h2 className={styles.title}>
             Something went wrong.{'\n'}Please click the button below to try
             again.
           </h2>
 
-          <p aria-live="polite">{this.state.error?.message}</p>
+          <p aria-live='polite'>{this.state.error?.message}</p>
 
           <button
             onClick={this.handleRetry}
             className={styles.button}
-            aria-label="Reload page to try again"
+            aria-label='Reload page to try again'
           >
             Try Again
           </button>

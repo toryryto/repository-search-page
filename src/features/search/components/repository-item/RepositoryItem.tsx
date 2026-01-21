@@ -2,7 +2,7 @@ import { CircleAlert, Clock, GitFork, Star } from 'lucide-react';
 import { graphql, useFragment } from 'react-relay';
 import { formatRelativeTime } from '../../../../utils/formatRelativeTime';
 import { BookmarkButton } from '../../../bookmark/components/button/BookmarkButton';
-import { StartButton } from '../../../star/components/button/StarButton';
+import { StarButton } from '../../../star/components/button/StarButton';
 import { repositoryItemStyle as styles } from './RepositoryItem.css';
 import type { RepositoryItem_repository$key } from './__generated__/RepositoryItem_repository.graphql';
 
@@ -55,7 +55,7 @@ export function RepositoryItem({ repositoryRef }: Props) {
               repositoryName={repository.name}
             />
 
-            <StartButton repositoryRef={repository} />
+            <StarButton repositoryRef={repository} />
           </div>
         </div>
         {repository.description && (
