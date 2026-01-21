@@ -41,6 +41,7 @@ globalStyle('body', {
       minHeight: '100vh',
       scrollbarWidth: 'none',
       msOverflowStyle: 'none',
+      backgroundColor: '#f8f8f8',
     },
   },
 });
