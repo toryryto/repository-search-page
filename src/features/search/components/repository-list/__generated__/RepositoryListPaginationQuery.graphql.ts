@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<3e73891c66fca6bd8f165290a21962f9>>
+ * @generated SignedSource<<7f176e688934d783774b74710927e4cd>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,36 +10,38 @@
 
 import { ConcreteRequest } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type RepositoryListQuery$variables = {
+export type RepositoryListPaginationQuery$variables = {
   after?: string | null | undefined;
-  first: number;
+  first?: number | null | undefined;
   searchQuery: string;
 };
-export type RepositoryListQuery$data = {
+export type RepositoryListPaginationQuery$data = {
   readonly " $fragmentSpreads": FragmentRefs<"RepositoryList_query">;
 };
-export type RepositoryListQuery = {
-  response: RepositoryListQuery$data;
-  variables: RepositoryListQuery$variables;
+export type RepositoryListPaginationQuery = {
+  response: RepositoryListPaginationQuery$data;
+  variables: RepositoryListPaginationQuery$variables;
 };
 
 const node: ConcreteRequest = (function(){
-var v0 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "after"
-},
-v1 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "first"
-},
-v2 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "searchQuery"
-},
-v3 = [
+var v0 = [
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "after"
+  },
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "first"
+  },
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "searchQuery"
+  }
+],
+v1 = [
   {
     "kind": "Variable",
     "name": "after",
@@ -61,14 +63,14 @@ v3 = [
     "value": "REPOSITORY"
   }
 ],
-v4 = {
+v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "id",
   "storageKey": null
 },
-v5 = {
+v3 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -77,14 +79,10 @@ v5 = {
 };
 return {
   "fragment": {
-    "argumentDefinitions": [
-      (v0/*: any*/),
-      (v1/*: any*/),
-      (v2/*: any*/)
-    ],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "RepositoryListQuery",
+    "name": "RepositoryListPaginationQuery",
     "selections": [
       {
         "args": null,
@@ -97,17 +95,13 @@ return {
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [
-      (v2/*: any*/),
-      (v1/*: any*/),
-      (v0/*: any*/)
-    ],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "RepositoryListQuery",
+    "name": "RepositoryListPaginationQuery",
     "selections": [
       {
         "alias": null,
-        "args": (v3/*: any*/),
+        "args": (v1/*: any*/),
         "concreteType": "SearchResultItemConnection",
         "kind": "LinkedField",
         "name": "search",
@@ -139,8 +133,8 @@ return {
                   {
                     "kind": "InlineFragment",
                     "selections": [
-                      (v4/*: any*/),
-                      (v5/*: any*/),
+                      (v2/*: any*/),
+                      (v3/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -199,8 +193,8 @@ return {
                                 "name": "node",
                                 "plural": false,
                                 "selections": [
-                                  (v5/*: any*/),
-                                  (v4/*: any*/)
+                                  (v3/*: any*/),
+                                  (v2/*: any*/)
                                 ],
                                 "storageKey": null
                               }
@@ -225,8 +219,8 @@ return {
                             "name": "spdxId",
                             "storageKey": null
                           },
-                          (v5/*: any*/),
-                          (v4/*: any*/)
+                          (v3/*: any*/),
+                          (v2/*: any*/)
                         ],
                         "storageKey": null
                       },
@@ -262,7 +256,7 @@ return {
                   {
                     "kind": "InlineFragment",
                     "selections": [
-                      (v4/*: any*/)
+                      (v2/*: any*/)
                     ],
                     "type": "Node",
                     "abstractKey": "__isNode"
@@ -310,7 +304,7 @@ return {
       },
       {
         "alias": null,
-        "args": (v3/*: any*/),
+        "args": (v1/*: any*/),
         "filters": [
           "query",
           "type"
@@ -323,16 +317,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "2372c8d50c47c86defa282629d7c680b",
+    "cacheID": "a06fdae722f0063c23f832743e1a2786",
     "id": null,
     "metadata": {},
-    "name": "RepositoryListQuery",
+    "name": "RepositoryListPaginationQuery",
     "operationKind": "query",
-    "text": "query RepositoryListQuery(\n  $searchQuery: String!\n  $first: Int!\n  $after: String\n) {\n  ...RepositoryList_query\n}\n\nfragment RepositoryItem_repository on Repository {\n  id\n  name\n  description\n  stargazerCount\n  forkCount\n  pushedAt\n  languages(first: 1) {\n    edges {\n      node {\n        name\n        id\n      }\n    }\n  }\n  licenseInfo {\n    spdxId\n    name\n    id\n  }\n  issues {\n    totalCount\n  }\n  ...StarButton_repository\n}\n\nfragment RepositoryList_query on Query {\n  search(query: $searchQuery, type: REPOSITORY, first: $first, after: $after) {\n    edges {\n      node {\n        __typename\n        ... on Repository {\n          id\n          ...RepositoryItem_repository\n        }\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment StarButton_repository on Repository {\n  id\n  viewerHasStarred\n}\n"
+    "text": "query RepositoryListPaginationQuery(\n  $after: String\n  $first: Int\n  $searchQuery: String!\n) {\n  ...RepositoryList_query\n}\n\nfragment RepositoryItem_repository on Repository {\n  id\n  name\n  description\n  stargazerCount\n  forkCount\n  pushedAt\n  languages(first: 1) {\n    edges {\n      node {\n        name\n        id\n      }\n    }\n  }\n  licenseInfo {\n    spdxId\n    name\n    id\n  }\n  issues {\n    totalCount\n  }\n  ...StarButton_repository\n}\n\nfragment RepositoryList_query on Query {\n  search(query: $searchQuery, type: REPOSITORY, first: $first, after: $after) {\n    edges {\n      node {\n        __typename\n        ... on Repository {\n          id\n          ...RepositoryItem_repository\n        }\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment StarButton_repository on Repository {\n  id\n  viewerHasStarred\n}\n"
   }
 };
 })();
 
-(node as any).hash = "4626a505010b80f774367f21b3c59604";
+(node as any).hash = "d15fa8aa892d34eeb6cb52c4c47a0344";
 
 export default node;

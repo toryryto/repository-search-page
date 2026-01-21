@@ -1,5 +1,8 @@
-import { graphql, useLazyLoadQuery } from 'react-relay';
+import { graphql, useLazyLoadQuery, usePaginationFragment } from 'react-relay';
+import { useInfiniteScroll } from '../../../../hooks/useInifiniteScroll';
 import { RepositoryItem } from '../repository-item/RepositoryItem';
+import type { RepositoryList_query$key } from './__generated__/RepositoryList_query.graphql';
+import type { RepositoryListPaginationQuery } from './__generated__/RepositoryListPaginationQuery.graphql';
 import type { RepositoryListQuery } from './__generated__/RepositoryListQuery.graphql';
 import { repositoryListStyles as styles } from './RepositoryList.css';
 
@@ -8,25 +11,59 @@ type Props = {
 };
 
 export function RepositoryList({ query }: Props) {
-  const data = useLazyLoadQuery<RepositoryListQuery>(
+  const queryData = useLazyLoadQuery<RepositoryListQuery>(
     graphql`
-      query RepositoryListQuery($searchQuery: String!) {
-        search(query: $searchQuery, type: REPOSITORY, first: 10) {
-          nodes {
-            ... on Repository {
-              id
-              ...RepositoryItem_repository
+      query RepositoryListQuery(
+        $searchQuery: String!
+        $first: Int!
+        $after: String
+      ) {
+        ...RepositoryList_query
+      }
+    `,
+    { searchQuery: query, first: 10 },
+  );
+
+  const { data, loadNext, hasNext, isLoadingNext } = usePaginationFragment<
+    RepositoryListPaginationQuery,
+    RepositoryList_query$key
+  >(
+    graphql`
+      fragment RepositoryList_query on Query
+      @refetchable(queryName: "RepositoryListPaginationQuery") {
+        search(
+          query: $searchQuery
+          type: REPOSITORY
+          first: $first
+          after: $after
+        ) @connection(key: "RepositoryList_search") {
+          edges {
+            node {
+              ... on Repository {
+                id
+                ...RepositoryItem_repository
+              }
             }
           }
         }
       }
     `,
-    { searchQuery: query },
+    queryData,
   );
 
-  const repositories = data?.search.nodes?.filter(
-    (node): node is NonNullable<typeof node> & { id: string } =>
-      node != null && 'id' in node,
+  const handleLoadMore = () => {
+    loadNext(10);
+  };
+
+  const { targetRef } = useInfiniteScroll({
+    hasNext,
+    isLoading: isLoadingNext,
+    onLoadMore: handleLoadMore,
+  });
+
+  const repositories = data?.search?.edges?.filter(
+    (edge): edge is NonNullable<typeof edge> & { node: { id: string } } =>
+      edge?.node != null && 'id' in edge.node,
   );
 
   if (!repositories?.length) {
@@ -34,10 +71,15 @@ export function RepositoryList({ query }: Props) {
   }
 
   return (
-    <ul className={styles.list} aria-label='Repository search results'>
-      {repositories.map((node) => (
-        <RepositoryItem key={node.id} repositoryRef={node} />
-      ))}
-    </ul>
+    <>
+      <ul className={styles.list} aria-label='Repository search results'>
+        {repositories.map((edge) => (
+          <RepositoryItem key={edge.node.id} repositoryRef={edge.node} />
+        ))}
+      </ul>
+
+      {hasNext && <div ref={targetRef} />}
+      {isLoadingNext && <div className={styles.loading}>로딩중입니다....</div>}
+    </>
   );
 }

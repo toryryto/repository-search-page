@@ -19,7 +19,7 @@ export function RepositoryItem({ repositoryRef }: Props) {
         description
         stargazerCount
         forkCount
-        updatedAt
+        pushedAt
         languages(first: 1) {
           edges {
             node {
@@ -95,10 +95,10 @@ export function RepositoryItem({ repositoryRef }: Props) {
 
           <li
             className={styles.statItem}
-            aria-label={`Updated ${formatRelativeTime(repository?.updatedAt)}`}
+            aria-label={`Updated ${formatRelativeTime(repository?.pushedAt)}`}
           >
             <Clock size={14} aria-hidden='true' />
-            <span>{formatRelativeTime(repository?.updatedAt)}</span>
+            <span>{formatRelativeTime(repository?.pushedAt)}</span>
           </li>
         </ul>
 
