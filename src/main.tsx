@@ -1,8 +1,12 @@
 import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+
 import { RelayEnvironmentProvider } from 'react-relay';
+
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
+
 import { networkEnvironment } from '../environment';
+
 import App from '@/App';
 import ErrorBoundaryWithRetry from '@/components/error/ErrorBoundaryWithRetry';
 import '@/styles/global.css';

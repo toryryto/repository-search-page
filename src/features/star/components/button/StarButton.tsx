@@ -1,6 +1,9 @@
-import { Star } from 'lucide-react';
 import { graphql, useFragment, useMutation } from 'react-relay';
+
 import type { RecordSourceSelectorProxy } from 'relay-runtime';
+
+import { Star } from 'lucide-react';
+
 import type { StarButton_repository$key } from './__generated__/StarButton_repository.graphql';
 import type { StarButtonAddMutation } from './__generated__/StarButtonAddMutation.graphql';
 import type { StarButtonRemoveMutation } from './__generated__/StarButtonRemoveMutation.graphql';

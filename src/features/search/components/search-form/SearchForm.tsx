@@ -1,4 +1,5 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react';
+
 import { searchFormStyles as styles } from './SearchForm.css';
 
 type Props = {

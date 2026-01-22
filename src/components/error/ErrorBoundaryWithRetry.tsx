@@ -1,5 +1,6 @@
 import type { ErrorInfo, ReactNode } from 'react';
 import { Component } from 'react';
+
 import { errorBoundaryStyles as styles } from './ErrorBoundaryWithRetry.css';
 
 interface Props {

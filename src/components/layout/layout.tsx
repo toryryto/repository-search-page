@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+
 import { layoutStyles as styles } from './layout.css';
 
 export function Layout({ children }: { children: ReactNode }) {

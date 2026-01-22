@@ -1,11 +1,13 @@
-import { LoadingSpinner } from '@/components/ui/loading-spinner/LoadingSpinner';
-import { RepositoryItem } from '@/features/search/components/repository-item/RepositoryItem';
-import { useInfiniteScroll } from '@/hooks/useInifiniteScroll';
 import { graphql, useLazyLoadQuery, usePaginationFragment } from 'react-relay';
+
 import type { RepositoryList_query$key } from './__generated__/RepositoryList_query.graphql';
 import type { RepositoryListPaginationQuery } from './__generated__/RepositoryListPaginationQuery.graphql';
 import type { RepositoryListQuery } from './__generated__/RepositoryListQuery.graphql';
 import { repositoryListStyles as styles } from './RepositoryList.css';
+
+import { LoadingSpinner } from '@/components/ui/loading-spinner/LoadingSpinner';
+import { RepositoryItem } from '@/features/search/components/repository-item/RepositoryItem';
+import { useInfiniteScroll } from '@/hooks/useInifiniteScroll';
 
 type Props = {
   query: string;

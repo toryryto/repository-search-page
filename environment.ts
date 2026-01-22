@@ -1,4 +1,5 @@
 import { Environment, type FetchFunction, Network } from 'relay-runtime';
+
 import { globalConfig as config } from './config';
 
 const fetchGraphQL: FetchFunction = async (request, variables) => {

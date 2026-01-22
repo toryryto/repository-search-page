@@ -1,7 +1,11 @@
-import { Bookmark } from 'lucide-react';
 import { useState } from 'react';
-import { bookMarkUtils } from '@/features/bookmark/utils';
+
+import { Bookmark } from 'lucide-react';
+
 import { bookmarkButtonStyles as styles } from './BookmarkButton.css';
+
+import { bookMarkUtils } from '@/features/bookmark/utils';
+
 
 type Props = {
   repositoryId: string;
