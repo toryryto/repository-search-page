@@ -25,7 +25,7 @@ GitHub GraphQL API를 사용하기 위해 [Personal Access Token](https://github
 
 ```bash
 VITE_GITHUB_TOKEN=your_github_token_here
-VITE_HTTP_ENDPOINT=github_and_point_here
+VITE_HTTP_ENDPOINT=github_end_point_here
 ```
 
 ### 3. GitHub GraphQL 스키마 다운로드
