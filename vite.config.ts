@@ -1,3 +1,4 @@
+import path from 'path';
 import { defineConfig } from 'vite';
 import relay from 'vite-plugin-relay';
 import react from '@vitejs/plugin-react';
@@ -13,4 +14,9 @@ export default defineConfig({
     relay,
     vanillaExtractPlugin(),
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
 });

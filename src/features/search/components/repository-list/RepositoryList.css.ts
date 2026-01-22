@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { flexColumn } from '../../../../styles/utils.css';
+import { flexColumn } from '@/styles/utils.css';
 
 const list = style([
   flexColumn,

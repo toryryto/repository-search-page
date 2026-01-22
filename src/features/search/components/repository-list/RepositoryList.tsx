@@ -1,7 +1,7 @@
 import { graphql, useLazyLoadQuery, usePaginationFragment } from 'react-relay';
-import { LoadingSpinner } from '../../../../components/ui/loading-spinner/LoadingSpinner';
-import { useInfiniteScroll } from '../../../../hooks/useInifiniteScroll';
-import { RepositoryItem } from '../repository-item/RepositoryItem';
+import { LoadingSpinner } from '@/components/ui/loading-spinner/LoadingSpinner';
+import { useInfiniteScroll } from '@/hooks/useInifiniteScroll';
+import { RepositoryItem } from '@/features/search/components/repository-item/RepositoryItem';
 import type { RepositoryList_query$key } from './__generated__/RepositoryList_query.graphql';
 import type { RepositoryListPaginationQuery } from './__generated__/RepositoryListPaginationQuery.graphql';
 import type { RepositoryListQuery } from './__generated__/RepositoryListQuery.graphql';

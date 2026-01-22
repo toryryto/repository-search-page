@@ -4,7 +4,7 @@ import {
   flexBetween,
   flexColumn,
   flexRow,
-} from '../../../../styles/utils.css';
+} from '@/styles/utils.css';
 
 const wrapper = style([
   flexColumn,

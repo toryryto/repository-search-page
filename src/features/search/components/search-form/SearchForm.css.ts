@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { flexBetween, flexCenter } from '../../../../styles/utils.css';
+import { flexBetween, flexCenter } from '@/styles/utils.css';
 
 const form = style([
   flexBetween,
