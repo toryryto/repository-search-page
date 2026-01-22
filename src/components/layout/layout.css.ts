@@ -10,7 +10,8 @@ const wrapper = style([
     margin: '0 auto',
     padding: '0 16px',
     background: '#fff',
-    minHeight: '100vh',
+    height: '100vh',
+    overflow: 'hidden',
   },
 ]);
 
@@ -28,6 +29,13 @@ const section = style([
   flexColumn,
   {
     gap: 20,
+    flex: 1,
+    overflowY: 'auto',
+    scrollbarWidth: 'none',
+    msOverflowStyle: 'none',
+    '::-webkit-scrollbar': {
+      display: 'none',
+    },
   },
 ]);
 

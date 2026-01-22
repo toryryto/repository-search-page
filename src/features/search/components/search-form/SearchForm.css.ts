@@ -2,6 +2,13 @@ import { style } from '@vanilla-extract/css';
 
 import { flexBetween, flexCenter } from '@/styles/utils.css';
 
+const searchWrapper = style({
+  position: 'sticky',
+  top: 0,
+  background: '#fff',
+  zIndex: 10,
+});
+
 const form = style([
   flexBetween,
   {
@@ -43,6 +50,7 @@ const buttonText = style({
 });
 
 export const searchFormStyles = {
+  searchWrapper,
   form,
   input,
   button,

@@ -24,7 +24,7 @@ export function SearchForm({ onSearch, initialQuery = '' }: Props) {
   };
 
   return (
-    <search>
+    <search className={styles.searchWrapper}>
       <form className={styles.form} onSubmit={handleSubmit} role='search'>
         <input
           type='search'
