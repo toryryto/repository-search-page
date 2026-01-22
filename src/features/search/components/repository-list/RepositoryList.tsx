@@ -1,7 +1,7 @@
-import { graphql, useLazyLoadQuery, usePaginationFragment } from 'react-relay';
 import { LoadingSpinner } from '@/components/ui/loading-spinner/LoadingSpinner';
-import { useInfiniteScroll } from '@/hooks/useInifiniteScroll';
 import { RepositoryItem } from '@/features/search/components/repository-item/RepositoryItem';
+import { useInfiniteScroll } from '@/hooks/useInifiniteScroll';
+import { graphql, useLazyLoadQuery, usePaginationFragment } from 'react-relay';
 import type { RepositoryList_query$key } from './__generated__/RepositoryList_query.graphql';
 import type { RepositoryListPaginationQuery } from './__generated__/RepositoryListPaginationQuery.graphql';
 import type { RepositoryListQuery } from './__generated__/RepositoryListQuery.graphql';
@@ -11,55 +11,48 @@ type Props = {
   query: string;
 };
 
-export function RepositoryList({ query }: Props) {
-  const queryData = useLazyLoadQuery<RepositoryListQuery>(
-    graphql`
-      query RepositoryListQuery(
-        $searchQuery: String!
-        $first: Int!
-        $after: String
-      ) {
-        ...RepositoryList_query
+const repositoryListQuery = graphql`
+  query RepositoryListQuery(
+    $searchQuery: String!
+    $first: Int!
+    $after: String
+  ) {
+    ...RepositoryList_query
+  }
+`;
+
+const paginationData = graphql`
+  fragment RepositoryList_query on Query
+  @refetchable(queryName: "RepositoryListPaginationQuery") {
+    search(query: $searchQuery, type: REPOSITORY, first: $first, after: $after)
+      @connection(key: "RepositoryList_search") {
+      edges {
+        node {
+          ... on Repository {
+            id
+            ...RepositoryItem_repository
+          }
+        }
       }
-    `,
-    { searchQuery: query, first: 10 },
-  );
+    }
+  }
+`;
+
+export function RepositoryList({ query }: Props) {
+  const queryData = useLazyLoadQuery<RepositoryListQuery>(repositoryListQuery, {
+    searchQuery: query,
+    first: 10,
+  });
 
   const { data, loadNext, hasNext, isLoadingNext } = usePaginationFragment<
     RepositoryListPaginationQuery,
     RepositoryList_query$key
-  >(
-    graphql`
-      fragment RepositoryList_query on Query
-      @refetchable(queryName: "RepositoryListPaginationQuery") {
-        search(
-          query: $searchQuery
-          type: REPOSITORY
-          first: $first
-          after: $after
-        ) @connection(key: "RepositoryList_search") {
-          edges {
-            node {
-              ... on Repository {
-                id
-                ...RepositoryItem_repository
-              }
-            }
-          }
-        }
-      }
-    `,
-    queryData,
-  );
-
-  const handleLoadMore = () => {
-    loadNext(10);
-  };
+  >(paginationData, queryData);
 
   const { targetRef } = useInfiniteScroll({
     hasNext,
     isLoading: isLoadingNext,
-    onLoadMore: handleLoadMore,
+    onLoadMore: () => loadNext(10),
   });
 
   const repositories = data?.search?.edges?.filter(

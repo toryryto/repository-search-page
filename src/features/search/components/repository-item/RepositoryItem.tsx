@@ -1,8 +1,8 @@
-import { CircleAlert, Clock, GitFork, Star } from 'lucide-react';
-import { graphql, useFragment } from 'react-relay';
-import { formatRelativeTime } from '@/utils/formatRelativeTime';
 import { BookmarkButton } from '@/features/bookmark/components/button/BookmarkButton';
 import { StarButton } from '@/features/star/components/button/StarButton';
+import { formatRelativeTime } from '@/utils/formatRelativeTime';
+import { CircleAlert, Clock, GitFork, Star } from 'lucide-react';
+import { graphql, useFragment } from 'react-relay';
 import { repositoryItemStyle as styles } from './RepositoryItem.css';
 import type { RepositoryItem_repository$key } from './__generated__/RepositoryItem_repository.graphql';
 
@@ -10,36 +10,35 @@ type Props = {
   repositoryRef: RepositoryItem_repository$key;
 };
 
-export function RepositoryItem({ repositoryRef }: Props) {
-  const repository = useFragment(
-    graphql`
-      fragment RepositoryItem_repository on Repository {
-        id
-        name
-        description
-        stargazerCount
-        forkCount
-        pushedAt
-        languages(first: 1) {
-          edges {
-            node {
-              name
-            }
-          }
-        }
-        licenseInfo {
-          spdxId
+const repositoryFragment = graphql`
+  fragment RepositoryItem_repository on Repository {
+    id
+    name
+    description
+    stargazerCount
+    forkCount
+    pushedAt
+    languages(first: 1) {
+      edges {
+        node {
           name
         }
-        issues {
-          totalCount
-        }
-
-        ...StarButton_repository
       }
-    `,
-    repositoryRef,
-  );
+    }
+    licenseInfo {
+      spdxId
+      name
+    }
+    issues {
+      totalCount
+    }
+
+    ...StarButton_repository
+  }
+`;
+
+export function RepositoryItem({ repositoryRef }: Props) {
+  const repository = useFragment(repositoryFragment, repositoryRef);
 
   const primaryLanguage = repository?.languages?.edges?.[0]?.node?.name;
 

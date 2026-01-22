@@ -1,5 +1,6 @@
 import { Star } from 'lucide-react';
 import { graphql, useFragment, useMutation } from 'react-relay';
+import type { RecordSourceSelectorProxy } from 'relay-runtime';
 import type { StarButton_repository$key } from './__generated__/StarButton_repository.graphql';
 import type { StarButtonAddMutation } from './__generated__/StarButtonAddMutation.graphql';
 import type { StarButtonRemoveMutation } from './__generated__/StarButtonRemoveMutation.graphql';
@@ -9,39 +10,39 @@ type Props = {
   repositoryRef: StarButton_repository$key;
 };
 
-export function StarButton({ repositoryRef }: Props) {
-  const repository = useFragment(
-    graphql`
-      fragment StarButton_repository on Repository {
-        id
+const repositoryFragment = graphql`
+  fragment StarButton_repository on Repository {
+    id
+    viewerHasStarred
+  }
+`;
+
+const addStarMutation = graphql`
+  mutation StarButtonAddMutation($input: AddStarInput!) {
+    addStar(input: $input) {
+      starrable {
         viewerHasStarred
       }
-    `,
-    repositoryRef,
-  );
+    }
+  }
+`;
 
-  const [commitAddStar, isAddingInFlight] = useMutation<StarButtonAddMutation>(
-    graphql`
-      mutation StarButtonAddMutation($input: AddStarInput!) {
-        addStar(input: $input) {
-          starrable {
-            viewerHasStarred
-          }
-        }
+const removeStarMutation = graphql`
+  mutation StarButtonRemoveMutation($input: RemoveStarInput!) {
+    removeStar(input: $input) {
+      starrable {
+        viewerHasStarred
       }
-    `,
-  );
+    }
+  }
+`;
 
+export function StarButton({ repositoryRef }: Props) {
+  const repository = useFragment(repositoryFragment, repositoryRef);
+  const [commitAddStar, isAddingInFlight] =
+    useMutation<StarButtonAddMutation>(addStarMutation);
   const [commitRemoveStar, isRemovingInFlight] =
-    useMutation<StarButtonRemoveMutation>(graphql`
-      mutation StarButtonRemoveMutation($input: RemoveStarInput!) {
-        removeStar(input: $input) {
-          starrable {
-            viewerHasStarred
-          }
-        }
-      }
-    `);
+    useMutation<StarButtonRemoveMutation>(removeStarMutation);
 
   const isInFlight = isAddingInFlight || isRemovingInFlight;
   const isStarred = repository.viewerHasStarred;
@@ -49,19 +50,19 @@ export function StarButton({ repositoryRef }: Props) {
   const handleToggle = () => {
     if (isInFlight) return;
 
-    const commitFn = isStarred ? commitRemoveStar : commitAddStar;
-
-    commitFn({
+    const config = {
       variables: { input: { starrableId: repository.id } },
-      optimisticResponse: {
-        removeStar: {
-          starrable: {
-            id: repository.id,
-            viewerHasStarred: false,
-          },
-        },
+      optimisticUpdater: (store: RecordSourceSelectorProxy) => {
+        const repo = store.get(repository.id);
+        repo?.setValue(!isStarred, 'viewerHasStarred');
       },
-    });
+    };
+
+    if (isStarred) {
+      commitRemoveStar(config);
+    } else {
+      commitAddStar(config);
+    }
   };
 
   return (
